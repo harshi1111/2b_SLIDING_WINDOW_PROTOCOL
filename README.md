@@ -1,5 +1,8 @@
+# BAKKIYALAKSHMI
 # 2b IMPLEMENTATION OF SLIDING WINDOW PROTOCOL
-## AIM
+## AIM:
+To write a python program to perform sliding window protocol
+
 ## ALGORITHM:
 1. Start the program.
 2. Get the frame size from the user
@@ -8,16 +11,37 @@
 5. If your frames reach the server it will send ACK signal to client
 6. Stop the Program
 ## PROGRAM
-## Cient Program:
-![Screenshot 2024-03-08 142427](https://github.com/harshi1111/2b_SLIDING_WINDOW_PROTOCOL/assets/84671735/cc1b4b72-25a9-4db3-9e8a-814e5abe411e)
-## Server Program:
-![Screenshot 2024-03-08 142446](https://github.com/harshi1111/2b_SLIDING_WINDOW_PROTOCOL/assets/84671735/9531a5f3-ed07-441f-a87b-dab6fd64b819)
-
-## OUTPUT
-## Client Output:
-![Screenshot 2024-03-08 142056](https://github.com/harshi1111/2b_SLIDING_WINDOW_PROTOCOL/assets/84671735/f8863d37-ae67-473c-a497-6af5c9e9744d)
-## Server Output:
-![Screenshot 2024-03-08 142109](https://github.com/harshi1111/2b_SLIDING_WINDOW_PROTOCOL/assets/84671735/2e510fb3-6917-4d65-9791-4b11c0a2b03f)
+```
+CLIENT:
+import socket
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+size=int(input("Enter number of frames to send : "))
+l=list(range(size))
+s=int(input("Enter Window Size : "))
+st=0
+i=0
+while True:
+ while(i<len(l)):
+ st+=s
+ c.send(str(l[i:st]).encode())
+ ack=c.recv(1024).decode()
+ if ack:
+ print(ack)
+ i+=s
+SERVER:
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+while True: 
+ print(s.recv(1024).decode())
+ s.send("acknowledgement recived from the server".encode())
+```
+## OUPUT
+![Screenshot 2024-03-13 100518](https://github.com/Bakkiyalakshmiethiraj/2b_SLIDING_WINDOW_PROTOCOL/assets/144870983/3bc721cd-f81b-4eff-91d6-7a3c81403e78)
+![Screenshot 2024-03-13 100533](https://github.com/Bakkiyalakshmiethiraj/2b_SLIDING_WINDOW_PROTOCOL/assets/144870983/0abf4abf-4ec4-4c6e-b33a-014ec2475c11)
 
 ## RESULT
 Thus, python program to perform stop and wait protocol was successfully executed
